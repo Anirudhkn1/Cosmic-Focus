@@ -1,0 +1,1 @@
+ALTER TABLE public.focus_sessions ADD COLUMN IF NOT EXISTS segment_start_elapsed numeric NOT NULL DEFAULT 0;

@@ -1,0 +1,231 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * COSMIC FOCUS — NASA-inspired mission control design system.
+ * Dark navy base, restrained blue/violet glow, high contrast, technical type.
+ * All colors are oklch semantic tokens. Never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-panel: var(--panel);
+  --color-panel-foreground: var(--panel-foreground);
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --shadow-glow: 0 0 0 1px var(--glow-ring), 0 18px 50px -18px var(--glow-soft);
+  --shadow-panel: 0 20px 60px -30px oklch(0 0 0 / 0.9);
+}
+
+:root {
+  --radius: 0.9rem;
+
+  --background: oklch(0.17 0.038 264);
+  --foreground: oklch(0.95 0.012 250);
+
+  --card: oklch(0.222 0.04 264);
+  --card-foreground: oklch(0.95 0.012 250);
+
+  --panel: oklch(0.25 0.042 265);
+  --panel-foreground: oklch(0.95 0.012 250);
+
+  --popover: oklch(0.23 0.042 264);
+  --popover-foreground: oklch(0.95 0.012 250);
+
+  --primary: oklch(0.68 0.152 245);
+  --primary-foreground: oklch(0.15 0.04 264);
+
+  --secondary: oklch(0.29 0.045 265);
+  --secondary-foreground: oklch(0.93 0.014 250);
+
+  --muted: oklch(0.27 0.038 265);
+  --muted-foreground: oklch(0.72 0.028 258);
+
+  --accent: oklch(0.66 0.15 296);
+  --accent-foreground: oklch(0.15 0.04 264);
+
+  --destructive: oklch(0.62 0.2 22);
+  --destructive-foreground: oklch(0.97 0.01 250);
+
+  --success: oklch(0.72 0.14 165);
+  --warning: oklch(0.79 0.14 82);
+
+  --border: oklch(0.34 0.04 264);
+  --input: oklch(0.32 0.04 264);
+  --ring: oklch(0.68 0.152 245);
+
+  --glow-ring: oklch(0.68 0.152 245 / 0.28);
+  --glow-soft: oklch(0.62 0.16 262 / 0.55);
+
+  --gradient-space: radial-gradient(
+      1100px 620px at 78% -12%,
+      oklch(0.36 0.11 285 / 0.5),
+      transparent 62%
+    ),
+    radial-gradient(900px 520px at 6% 8%, oklch(0.34 0.1 245 / 0.42), transparent 60%),
+    linear-gradient(180deg, oklch(0.15 0.035 264), oklch(0.13 0.03 266));
+  --gradient-panel: linear-gradient(
+    160deg,
+    oklch(0.26 0.045 266 / 0.92),
+    oklch(0.2 0.04 265 / 0.92)
+  );
+  --gradient-primary: linear-gradient(120deg, oklch(0.68 0.152 245), oklch(0.66 0.15 296));
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-background);
+    background-image: var(--gradient-space);
+    background-attachment: fixed;
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.015em;
+  }
+}
+
+@utility starfield {
+  position: relative;
+}
+
+@utility starfield-layer {
+  background-image:
+    radial-gradient(1.4px 1.4px at 12% 22%, oklch(1 0 0 / 0.55), transparent 50%),
+    radial-gradient(1.2px 1.2px at 32% 68%, oklch(1 0 0 / 0.4), transparent 50%),
+    radial-gradient(1.6px 1.6px at 58% 18%, oklch(1 0 0 / 0.5), transparent 50%),
+    radial-gradient(1.1px 1.1px at 74% 54%, oklch(1 0 0 / 0.38), transparent 50%),
+    radial-gradient(1.5px 1.5px at 88% 30%, oklch(1 0 0 / 0.45), transparent 50%),
+    radial-gradient(1px 1px at 46% 86%, oklch(1 0 0 / 0.32), transparent 50%),
+    radial-gradient(1.2px 1.2px at 20% 92%, oklch(1 0 0 / 0.35), transparent 50%),
+    radial-gradient(1.3px 1.3px at 66% 78%, oklch(1 0 0 / 0.3), transparent 50%);
+  background-size: 100% 100%;
+}
+
+@utility panel {
+  background-image: var(--gradient-panel);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-panel);
+}
+
+@utility text-gradient {
+  background-image: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility label-tech {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-muted-foreground);
+}
+
+@keyframes thruster {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scaleX(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.15);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateY(-2px);
+  }
+  50% {
+    transform: translateY(2px);
+  }
+}
+
+@keyframes arrival-pulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes orbit-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@utility animate-thruster {
+  animation: thruster 0.6s ease-in-out infinite;
+}
+
+@utility animate-drift {
+  animation: drift 4s ease-in-out infinite;
+}
+
+@utility animate-arrival {
+  animation: arrival-pulse 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@utility animate-orbit {
+  animation: orbit-ring 26s linear infinite;
+}
