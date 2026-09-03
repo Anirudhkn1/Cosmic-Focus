@@ -1,1 +1,8 @@
 node_modules
+dist
+dist-ssr
+.output
+.wrangler
+.nitro
+.tanstack/tmp
+*.log

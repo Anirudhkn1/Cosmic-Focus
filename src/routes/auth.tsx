@@ -51,13 +51,21 @@ function AuthPage() {
         toast.success("Welcome back, astronaut.");
         void navigate({ to: "/mission" });
       } else {
-        const { error } = await supabase.auth.signUp({ email, password });
+        const { data, error } = await supabase.auth.signUp({ email, password });
         if (error) {
           toast.error(error.message);
           return;
         }
-        toast.success("Crew member created. Prepare for launch.");
-        void navigate({ to: "/mission" });
+        if (data?.session) {
+          toast.success("Crew member created. Prepare for launch.");
+          void navigate({ to: "/mission" });
+        } else {
+          toast.info(
+            "Crew account created! Please check your email inbox to confirm your account (or disable 'Confirm email' in Supabase to login immediately).",
+            { duration: 8000 }
+          );
+          setMode("signin");
+        }
       }
     } finally {
       setBusy(false);
