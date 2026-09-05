@@ -4,5 +4,7 @@ dist-ssr
 .output
 .wrangler
 .nitro
+.vercel
 .tanstack/tmp
 *.log
+
