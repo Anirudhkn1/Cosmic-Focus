@@ -5,6 +5,7 @@ import { leaderboardQuery } from "@/lib/cosmic/api";
 import { useMission } from "@/hooks/useMission";
 import { formatFocusTime } from "@/lib/cosmic/config";
 import { cn } from "@/lib/utils";
+import BlurText from "@/components/BlurText";
 
 export const Route = createFileRoute("/_authenticated/leaderboard")({
   head: () => ({
@@ -32,7 +33,14 @@ function LeaderboardPage() {
     <div className="space-y-6">
       <div>
         <p className="label-tech">Crew rankings</p>
-        <h1 className="font-display text-3xl font-semibold">This week in orbit</h1>
+        <BlurText
+          as="h1"
+          text="This week in orbit"
+          delay={80}
+          animateBy="words"
+          direction="top"
+          className="font-display text-3xl font-semibold"
+        />
         <p className="mt-1 text-sm text-muted-foreground">
           Ranked by XP earned since Monday. Only crews with leaderboard visibility enabled appear.
         </p>

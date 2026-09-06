@@ -8,6 +8,7 @@ import { useLiveSession } from "@/hooks/useLiveSession";
 import { OBJECT_TYPE_LABEL, formatAu } from "@/lib/cosmic/config";
 import type { CelestialObject } from "@/lib/cosmic/api";
 import { cn } from "@/lib/utils";
+import BlurText from "@/components/BlurText";
 
 export const Route = createFileRoute("/_authenticated/map")({
   head: () => ({
@@ -94,7 +95,14 @@ function MapPage() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <p className="label-tech">Journey map</p>
-          <h1 className="font-display text-3xl font-semibold">Cosmic Focus Journey</h1>
+          <BlurText
+            as="h1"
+            text="Cosmic Focus Journey"
+            delay={80}
+            animateBy="words"
+            direction="top"
+            className="font-display text-3xl font-semibold"
+          />
           <p className="mt-1 text-sm text-muted-foreground">Focus. Travel. Discover.</p>
         </div>
         <div className="flex items-center gap-2">

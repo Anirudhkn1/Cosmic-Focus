@@ -10,6 +10,7 @@ import { AVATAR_OPTIONS } from "@/components/cosmic/AstronautAvatar";
 import { useMission } from "@/hooks/useMission";
 import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
+import BlurText from "@/components/BlurText";
 
 export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({
@@ -57,7 +58,14 @@ function SettingsPage() {
     <div className="mx-auto max-w-2xl space-y-6">
       <div>
         <p className="label-tech">Crew settings</p>
-        <h1 className="font-display text-3xl font-semibold">Personnel file</h1>
+        <BlurText
+          as="h1"
+          text="Personnel file"
+          delay={80}
+          animateBy="words"
+          direction="top"
+          className="font-display text-3xl font-semibold"
+        />
       </div>
 
       <section className="panel space-y-4 p-5">

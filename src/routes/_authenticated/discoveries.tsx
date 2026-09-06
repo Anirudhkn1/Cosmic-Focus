@@ -7,6 +7,7 @@ import { useMission } from "@/hooks/useMission";
 import { OBJECT_TYPE_LABEL, formatAu } from "@/lib/cosmic/config";
 import type { CelestialObject } from "@/lib/cosmic/api";
 import { cn } from "@/lib/utils";
+import BlurText from "@/components/BlurText";
 
 export const Route = createFileRoute("/_authenticated/discoveries")({
   head: () => ({
@@ -39,9 +40,14 @@ function DiscoveriesPage() {
     <div className="space-y-6">
       <div>
         <p className="label-tech">Discovery log</p>
-        <h1 className="font-display text-3xl font-semibold">
-          {discoveredIds.size} of {objects.length} objects catalogued
-        </h1>
+        <BlurText
+          as="h1"
+          text={`${discoveredIds.size} of ${objects.length} objects catalogued`}
+          delay={70}
+          animateBy="words"
+          direction="top"
+          className="font-display text-3xl font-semibold"
+        />
       </div>
 
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">

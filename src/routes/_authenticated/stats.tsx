@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { StatCard } from "@/components/cosmic/StatCard";
 import { useMission, useRecentSessions } from "@/hooks/useMission";
 import { formatFocusTime, getMethod } from "@/lib/cosmic/config";
+import BlurText from "@/components/BlurText";
 
 export const Route = createFileRoute("/_authenticated/stats")({
   head: () => ({
@@ -34,7 +35,14 @@ function StatsPage() {
     <div className="space-y-6">
       <div>
         <p className="label-tech">Flight statistics</p>
-        <h1 className="font-display text-3xl font-semibold">Mission performance</h1>
+        <BlurText
+          as="h1"
+          text="Mission performance"
+          delay={80}
+          animateBy="words"
+          direction="top"
+          className="font-display text-3xl font-semibold"
+        />
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
