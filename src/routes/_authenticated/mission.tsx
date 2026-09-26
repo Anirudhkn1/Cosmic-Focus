@@ -9,6 +9,7 @@ import { AstronautAvatar } from "@/components/cosmic/AstronautAvatar";
 import { CelestialImage } from "@/components/cosmic/CelestialImage";
 import { useLiveSession } from "@/hooks/useLiveSession";
 import { formatAu, formatClock, formatFocusTime, OBJECT_TYPE_LABEL } from "@/lib/cosmic/config";
+import BlurText from "@/components/BlurText";
 
 export const Route = createFileRoute("/_authenticated/mission")({
   head: () => ({
@@ -53,7 +54,14 @@ function MissionPage() {
           <AstronautAvatar avatar={profile.avatar} className="h-14 w-14" />
           <div className="min-w-0 flex-1">
             <p className="label-tech">Commander</p>
-            <h1 className="truncate font-display text-2xl font-semibold">{profile.display_name}</h1>
+            <BlurText
+              as="h1"
+              text={profile.display_name}
+              delay={60}
+              animateBy="words"
+              direction="top"
+              className="truncate font-display text-2xl font-semibold"
+            />
           </div>
           <div className="w-full sm:w-64">
             <XpBar xp={profile.xp} />
@@ -65,9 +73,15 @@ function MissionPage() {
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <p className="label-tech">Current objective</p>
-            <h2 className="font-display text-xl font-semibold">
-              {destination ? `Transit to ${destination.name}` : "Journey complete"}
-            </h2>
+            <BlurText
+              key={destination?.id ?? "complete"}
+              as="h2"
+              text={destination ? `Transit to ${destination.name}` : "Journey complete"}
+              delay={60}
+              animateBy="words"
+              direction="top"
+              className="font-display text-xl font-semibold"
+            />
             <p className="mt-1 text-sm text-muted-foreground">
               {destination
                 ? `${formatFocusTime(remainingMinutes)} of focus remaining · ${requiredMinutes} min segment`

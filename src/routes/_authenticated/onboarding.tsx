@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { AVATAR_OPTIONS } from "@/components/cosmic/AstronautAvatar";
 import { useMission } from "@/hooks/useMission";
 import { cn } from "@/lib/utils";
+import BlurText from "@/components/BlurText";
 
 export const Route = createFileRoute("/_authenticated/onboarding")({
   head: () => ({
@@ -57,7 +58,14 @@ function Onboarding() {
     <div className="mx-auto max-w-xl space-y-6 py-6">
       <div>
         <p className="label-tech">Pre-flight</p>
-        <h1 className="font-display text-3xl font-semibold">Prepare for launch</h1>
+        <BlurText
+          as="h1"
+          text="Prepare for launch"
+          delay={80}
+          animateBy="words"
+          direction="top"
+          className="font-display text-3xl font-semibold"
+        />
         <p className="mt-2 text-sm text-muted-foreground">
           Your spacecraft is docked at the Sun. Set your call sign and suit before the first burn.
         </p>

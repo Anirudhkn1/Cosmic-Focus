@@ -1,0 +1,8 @@
+* [33mb0ce1ab[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m feat: implement authentication route and configure VS Code development environment
+* [33mbe483d2[m feat: implement authentication route and configure VS Code development environment
+* [33m619ce1e[m chore: update Supabase environment variables and add @supabase/server dependency
+* [33mff9d2fe[m commithore: update Supabase environment variables and add @supabase/server dependency
+* [33m421ff3d[m first commit
+* [33m3c29557[m Commit 2
+* [33m382fcc4[m Changed using Freebuff
+* [33mcb6e239[m Initial project setup with Cosmic components, Supabase integration, and UI elements. This commit includes the initial file structure, configuration files, and essential components for the project.

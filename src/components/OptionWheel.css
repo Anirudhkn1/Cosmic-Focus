@@ -1,0 +1,98 @@
+/* OptionWheel — bottom semicircular navigation */
+
+.option-wheel-wrapper {
+  position: fixed;
+  inset-x: 0;
+  bottom: 0;
+  z-index: 40;
+  pointer-events: none;
+  /* Safe area padding for devices with home indicator */
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.option-wheel-track {
+  position: relative;
+  height: 140px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: all;
+  /* Frosted arc background */
+  background: radial-gradient(
+    ellipse 100% 100% at 50% 110%,
+    oklch(0.13 0.03 265 / 0.96) 0%,
+    oklch(0.10 0.02 265 / 0.88) 60%,
+    transparent 100%
+  );
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-top: 1px solid oklch(0.35 0.05 265 / 0.35);
+}
+
+/* On desktop this nav is hidden — the top nav handles it */
+@media (min-width: 768px) {
+  .option-wheel-wrapper {
+    display: none;
+  }
+}
+
+.option-wheel-item {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 14px;
+  transition: background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  user-select: none;
+}
+
+.option-wheel-item:focus-visible {
+  outline: 2px solid oklch(0.68 0.152 245);
+  outline-offset: 2px;
+}
+
+.option-wheel-item.is-active {
+  background: oklch(0.68 0.152 245 / 0.12);
+}
+
+.option-wheel-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.option-wheel-icon.is-active {
+  transform: scale(1.15);
+}
+
+.option-wheel-label {
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1;
+  transition: opacity 0.2s;
+}
+
+/* Active indicator dot at the bottom center */
+.option-wheel-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36px;
+  height: 3px;
+  border-radius: 2px 2px 0 0;
+  background: oklch(0.68 0.152 245);
+  opacity: 0.85;
+  pointer-events: none;
+}

@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
-import { Link, useRouterState } from "@tanstack/react-router";
+import React, { type ReactNode } from "react";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import {
   Compass,
   Gauge,
@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 import { AstronautAvatar } from "./AstronautAvatar";
 import { useMission } from "@/hooks/useMission";
 import { XpBar } from "./XpBar";
+import { OptionWheel } from "@/components/OptionWheel";
 
 const NAV = [
   { to: "/mission", label: "Mission", icon: Rocket },
@@ -23,9 +24,21 @@ const NAV = [
   { to: "/leaderboard", label: "Ranks", icon: Trophy },
 ] as const;
 
+type NavItem = (typeof NAV)[number];
+
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { profile } = useMission();
+  const navigate = useNavigate();
+
+  const activeIndex = NAV.findIndex((item) => pathname.startsWith(item.to));
+  const safeActiveIndex = activeIndex === -1 ? 0 : activeIndex;
+
+  const wheelItems = NAV.map((item) => ({
+    label: item.label,
+    to: item.to,
+    icon: item.icon as React.ComponentType<{ className?: string }>,
+  }));
 
   return (
     <div className="min-h-screen">
@@ -74,29 +87,29 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <main className="mx-auto max-w-6xl px-4 pb-28 pt-6 md:pb-12">{children}</main>
+      <main className="mx-auto max-w-6xl px-4 pb-40 pt-6 md:pb-12">{children}</main>
 
-      <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-background/95 backdrop-blur-xl md:hidden">
-        <div className="grid grid-cols-6">
-          {NAV.map((item) => {
-            const Icon = item.icon;
-            const active = pathname.startsWith(item.to);
-            return (
-              <Link
-                key={item.to}
-                to={item.to}
-                className={cn(
-                  "flex flex-col items-center gap-1 py-2.5 text-[10px]",
-                  active ? "text-primary" : "text-muted-foreground",
-                )}
-              >
-                <Icon className="h-4 w-4" />
-                {item.label}
-              </Link>
-            );
-          })}
-        </div>
-      </nav>
+      {/* Mobile bottom semicircular wheel nav */}
+      <OptionWheel
+        items={wheelItems}
+        activeIndex={safeActiveIndex}
+        textColor="oklch(0.65 0.03 260)"
+        activeColor="#e8e4ff"
+        fontSize={1.05}
+        spacing={1.45}
+        curve={1}
+        tilt={5}
+        blur={1.5}
+        fade={0.28}
+        smoothing={160}
+        inset={68}
+        draggable
+        onNavigate={(to) => void navigate({ to: to as NavItem["to"] })}
+        onChange={(index) => {
+          const item = NAV[index];
+          if (item) void navigate({ to: item.to });
+        }}
+      />
     </div>
   );
 }

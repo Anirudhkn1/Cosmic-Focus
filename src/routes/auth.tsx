@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import BlurText from "@/components/BlurText";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
@@ -83,9 +84,15 @@ function AuthPage() {
 
       <div className="panel w-full max-w-sm p-7">
         <p className="label-tech">Mission control</p>
-        <h1 className="mt-1 font-display text-2xl font-semibold">
-          {mode === "signin" ? "Welcome back, astronaut" : "Create your crew account"}
-        </h1>
+        <BlurText
+          key={mode}
+          as="h1"
+          text={mode === "signin" ? "Welcome back, astronaut" : "Create your crew account"}
+          delay={60}
+          animateBy="words"
+          direction="top"
+          className="mt-1 font-display text-2xl font-semibold"
+        />
         <p className="mt-1.5 text-sm text-muted-foreground">
           {mode === "signin"
             ? "Sign in to resume your journey across the Solar System."

@@ -26,6 +26,7 @@ import {
 } from "@/lib/cosmic/config";
 import { cue } from "@/lib/cosmic/sound";
 import { cn } from "@/lib/utils";
+import BlurText from "@/components/BlurText";
 
 export const Route = createFileRoute("/_authenticated/focus")({
   head: () => ({
@@ -199,9 +200,15 @@ function FocusPage() {
     <div className="space-y-6">
       <div>
         <p className="label-tech">Flight deck</p>
-        <h1 className="font-display text-3xl font-semibold">
-          {session ? `Burn in progress · ${method.name}` : "Select a focus protocol"}
-        </h1>
+        <BlurText
+          key={session ? "session-active" : "session-idle"}
+          as="h1"
+          text={session ? `Burn in progress · ${method.name}` : "Select a focus protocol"}
+          delay={60}
+          animateBy="words"
+          direction="top"
+          className="font-display text-3xl font-semibold"
+        />
       </div>
 
       {!session ? (
